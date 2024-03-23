@@ -4,7 +4,7 @@ const { generateOGImage } = require("./og-image-generator");
 const app = express();
 require("dotenv").config();
 const axios = require("axios");
-const cors = require('cors')
+const cors = require("cors");
 
 const port = 3000;
 
@@ -26,7 +26,11 @@ app.get("/og-image.png", async (req, res) => {
   }
 
   try {
-    const { data: svg } = await axios.get(svgUrl);
+    const { data: svg } = await axios.get(svgUrl, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
 
     const imageBuffer = await generateOGImage(svg, placeholders);
     res.header("Content-Type", "image/png");
