@@ -4,6 +4,7 @@ const { generateOGImage } = require("./og-image-generator");
 const app = express();
 require("dotenv").config();
 const axios = require("axios");
+const cors = require('cors')
 
 const port = 3000;
 
@@ -14,6 +15,7 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/og-image.png", async (req, res) => {
   // take placeholders and svgUrl from query params
