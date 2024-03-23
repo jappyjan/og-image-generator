@@ -15,11 +15,13 @@ app.listen(port, () => {
 
 app.use(express.json());
 
-app.post("/og-image.png", async (req, res) => {
-  if (!req.body) {
-    throw new Error("No request body");
+app.get("/og-image.png", async (req, res) => {
+  // take placeholders and svgUrl from query params
+  const { placeholders, svgUrl } = req.query;
+
+  if (!placeholders || !svgUrl) {
+    return res.status(400).send("placeholders and svgUrl are required");
   }
-  const { placeholders, svgUrl } = req.body;
 
   try {
     const { data: svg } = await axios.get(svgUrl);
