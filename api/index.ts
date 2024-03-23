@@ -17,10 +17,10 @@ app.use(express.json());
 
 app.get("/og-image.png", async (req, res) => {
   // take placeholders and svgUrl from query params
-  const { placeholders, svgUrl } = req.query;
+  const { svgUrl, ...placeholders } = req.query;
 
-  if (!placeholders || !svgUrl) {
-    return res.status(400).send("placeholders and svgUrl are required");
+  if (!svgUrl) {
+    return res.status(400).send("placeholders are required");
   }
 
   try {
