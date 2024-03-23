@@ -31,6 +31,7 @@ app.post("/og-image.png", async (req, res) => {
     res.header("Cache-Control", "public, max-age=172800");
     res.header("Expires", new Date(Date.now() + 172800000).toUTCString());
     res.send(imageBuffer);
+    console.log("Image generated successfully");
     res.end();
   } catch (error) {
     console.error(error);
