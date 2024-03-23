@@ -1,10 +1,13 @@
 const basicAuth = require("express-basic-auth");
 
-function useAuthentication(app) {
-  const users = process.env.AUTH_USERS.split(",").map((user) => ({
-    name: user,
-    password: process.env["AUTH_USER_" + user + "_PASSWORD"] ?? "",
-  }));
+export function useAuthentication(app) {
+  const users = (process.env.AUTH_USERS ?? "")
+    .split(",")
+    .filter((user) => user.length > 0)
+    .map((user) => ({
+      name: user,
+      password: process.env["AUTH_USER_" + user + "_PASSWORD"] ?? "",
+    }));
 
   const usersWithoutPassword = users.filter((user) => !user.password);
   if (usersWithoutPassword.length > 0) {
@@ -30,5 +33,3 @@ function useAuthentication(app) {
     );
   }
 }
-
-module.exports = { useAuthentication };

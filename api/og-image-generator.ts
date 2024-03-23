@@ -1,6 +1,6 @@
 const { Resvg } = require("@resvg/resvg-js");
 
-function generateOGImage(svg, placeholders) {
+export function generateOGImage(svg, placeholders) {
   let content = svg;
 
   for (const [placeholder, value] of Object.entries(placeholders)) {
@@ -13,5 +13,3 @@ function generateOGImage(svg, placeholders) {
   const pngBuffer = pngData.asPng();
   return pngBuffer;
 }
-
-module.exports = { generateOGImage };

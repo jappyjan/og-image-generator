@@ -5,7 +5,7 @@ const app = express();
 require("dotenv").config();
 const axios = require("axios");
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 useAuthentication(app);
 
